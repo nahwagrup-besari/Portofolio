@@ -12,7 +12,10 @@
 
 <header class="header">
   <div class="header__row">
-    <a class="brand" href="index.html"><span class="brand__prompt">~$</span>portofolio</a>
+    <a class="brand" href="index.html">
+      <img data-cms-logo class="brand__logo" alt="Logo" hidden />
+      <span class="brand__prompt">~$</span>portofolio
+    </a>
     <span class="clock" data-clock></span>
     <button class="nav-toggle" data-nav-toggle aria-expanded="false">menu</button>
   </div>
@@ -27,8 +30,8 @@
 <main>
   <section class="page-hero wrap">
     <span class="eyebrow">./kopi</span>
-    <h1 class="page-hero__title">Di balik mesin espresso</h1>
-    <p class="page-hero__desc">Racikan, teknik seduh, dan cerita dari keseharian saya sebagai barista.</p>
+    <h1 class="page-hero__title" data-cms="page_kopi_title">Di balik mesin espresso</h1>
+    <p class="page-hero__desc" data-cms="page_kopi_desc">Racikan, teknik seduh, dan cerita dari keseharian saya sebagai barista.</p>
   </section>
 
   <section class="article-section wrap">
@@ -39,7 +42,7 @@
   </section>
 
   <footer class="footer wrap">
-    <p>© 2026 — dibangun manual, disimpan di Supabase, dipublikasikan lewat GitHub Pages.</p>
+    <p data-cms="footer_text">© 2026 — dibangun manual, disimpan di Supabase, dipublikasikan lewat GitHub Pages.</p>
   </footer>
 </main>
 
