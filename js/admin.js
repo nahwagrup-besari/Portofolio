@@ -17,6 +17,11 @@ const els = {
   adminList: document.querySelector("[data-admin-list]"),
   categoryTabs: document.querySelectorAll("[data-filter-tab]"),
   saveMsg: document.querySelector("[data-save-msg]"),
+
+  sectionTabs: document.querySelectorAll("[data-section-tab]"),
+  sections: document.querySelectorAll("[data-section]"),
+  settingsForm: document.querySelector("[data-settings-form]"),
+  settingsSaveMsg: document.querySelector("[data-settings-save-msg]"),
 };
 
 let editingId = null;
@@ -42,6 +47,7 @@ function showDashboard() {
   els.loginView.hidden = true;
   els.dashboardView.hidden = false;
   loadAdminArticles();
+  loadSiteSettingsIntoForm();
 }
 
 els.loginForm?.addEventListener("submit", async (e) => {
@@ -195,5 +201,120 @@ function startEdit(article) {
   els.cancelEditBtn.hidden = false;
   els.articleForm.scrollIntoView({ behavior: "smooth" });
 }
+
+/* ---------------- TAB SECTION (Kelola artikel / Tampilan website) ---------------- */
+
+els.sectionTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const target = tab.dataset.sectionTab;
+    els.sectionTabs.forEach((t) => t.classList.toggle("is-active", t === tab));
+    els.sections.forEach((sec) => {
+      sec.hidden = sec.dataset.section !== target;
+    });
+  });
+});
+
+/* ---------------- TAMPILAN WEBSITE (site_settings) ---------------- */
+
+const SETTINGS_TEXT_FIELDS = [
+  "hero_title",
+  "hero_subtitle",
+  "dir_website_title",
+  "dir_website_desc",
+  "dir_kopi_title",
+  "dir_kopi_desc",
+  "dir_goldfish_title",
+  "dir_goldfish_desc",
+  "page_website_title",
+  "page_website_desc",
+  "page_kopi_title",
+  "page_kopi_desc",
+  "page_goldfish_title",
+  "page_goldfish_desc",
+  "footer_text",
+];
+
+const SETTINGS_COLOR_FIELDS = ["accent_website", "accent_kopi", "accent_goldfish"];
+
+async function loadSiteSettingsIntoForm() {
+  if (!els.settingsForm) return;
+
+  const { data, error } = await db.from("site_settings").select("*").eq("id", 1).single();
+  if (error || !data) return;
+
+  SETTINGS_TEXT_FIELDS.forEach((key) => {
+    if (els.settingsForm[key] && data[key]) els.settingsForm[key].value = data[key];
+  });
+
+  SETTINGS_COLOR_FIELDS.forEach((key) => {
+    if (els.settingsForm[key] && data[key]) els.settingsForm[key].value = data[key];
+  });
+
+  if (data.logo_url) {
+    els.settingsForm.logo_url.value = data.logo_url;
+    showPreview("logo_url", data.logo_url);
+  }
+  if (data.hero_image_url) {
+    els.settingsForm.hero_image_url.value = data.hero_image_url;
+    showPreview("hero_image_url", data.hero_image_url);
+  }
+}
+
+function showPreview(key, url) {
+  const img = els.settingsForm.querySelector(`[data-preview="${key}"]`);
+  if (!img) return;
+  img.src = url;
+  img.classList.add("is-visible");
+}
+
+async function uploadSiteImage(file, folder) {
+  const path = `site/${folder}-${Date.now()}-${file.name}`;
+  const { error } = await db.storage.from(STORAGE_BUCKET).upload(path, file);
+  if (error) throw error;
+  return db.storage.from(STORAGE_BUCKET).getPublicUrl(path).data.publicUrl;
+}
+
+els.settingsForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  els.settingsSaveMsg.textContent = "Menyimpan...";
+
+  const formData = new FormData(els.settingsForm);
+  const payload = { id: 1 };
+
+  [...SETTINGS_TEXT_FIELDS, ...SETTINGS_COLOR_FIELDS].forEach((key) => {
+    payload[key] = formData.get(key) || null;
+  });
+
+  payload.logo_url = formData.get("logo_url") || null;
+  payload.hero_image_url = formData.get("hero_image_url") || null;
+
+  try {
+    const logoFile = formData.get("logo");
+    if (logoFile && logoFile.size > 0) {
+      payload.logo_url = await uploadSiteImage(logoFile, "logo");
+      showPreview("logo_url", payload.logo_url);
+    }
+
+    const heroFile = formData.get("hero_image");
+    if (heroFile && heroFile.size > 0) {
+      payload.hero_image_url = await uploadSiteImage(heroFile, "hero");
+      showPreview("hero_image_url", payload.hero_image_url);
+    }
+  } catch (uploadError) {
+    els.settingsSaveMsg.textContent = "Gagal unggah gambar: " + uploadError.message;
+    return;
+  }
+
+  const { error } = await db.from("site_settings").upsert(payload);
+
+  if (error) {
+    els.settingsSaveMsg.textContent = "Gagal menyimpan: " + error.message;
+    return;
+  }
+
+  els.settingsForm.logo_url.value = payload.logo_url || "";
+  els.settingsForm.hero_image_url.value = payload.hero_image_url || "";
+  els.settingsSaveMsg.textContent = "Tampilan website berhasil diperbarui.";
+});
 
 checkSession();
