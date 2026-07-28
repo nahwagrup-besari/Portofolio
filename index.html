@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>~/portofolio — beranda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-theme="website">
+
+<header class="header">
+  <div class="header__row">
+    <a class="brand" href="index.html"><span class="brand__prompt">~$</span>portofolio</a>
+    <span class="clock" data-clock></span>
+    <button class="nav-toggle" data-nav-toggle aria-expanded="false">menu</button>
+  </div>
+  <nav class="nav" data-nav>
+    <a href="index.html">beranda</a>
+    <a href="website.html">website</a>
+    <a href="kopi.html">kopi</a>
+    <a href="goldfish.html">goldfish</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="terminal">
+      <div class="terminal__bar">
+        <span class="terminal__dot"></span><span class="terminal__dot"></span><span class="terminal__dot"></span>
+      </div>
+      <div class="terminal__body">
+        <p class="terminal__line"><span class="prompt">$</span>whoami</p>
+        <h1 class="hero__title">Mahasiswa informatika. Barista. Penjaga goldfish.</h1>
+        <p class="hero__subtitle">Tiga proses yang jalan bersamaan di sistem yang sama — kadang saling silang, tapi masing-masing punya ruangnya sendiri. Pilih direktori di bawah untuk masuk.</p>
+        <p class="terminal__line" style="margin-top:18px"><span class="prompt">$</span>ls -la ./</p>
+      </div>
+    </div>
+
+    <div class="directories">
+      <a class="dir-card dir-card--website" href="website.html">
+        <span class="dir-card__cmd">cd ./website</span>
+        <h2 class="dir-card__title">Website & backend</h2>
+        <p class="dir-card__desc">Proyek, eksperimen, dan catatan belajar seputar backend development.</p>
+      </a>
+      <a class="dir-card dir-card--kopi" href="kopi.html">
+        <span class="dir-card__cmd">cd ./kopi</span>
+        <h2 class="dir-card__title">Kopi & barista</h2>
+        <p class="dir-card__desc">Racikan, teknik seduh, dan cerita dari balik mesin espresso.</p>
+      </a>
+      <a class="dir-card dir-card--goldfish" href="goldfish.html">
+        <span class="dir-card__cmd">cd ./goldfish</span>
+        <h2 class="dir-card__title">Goldfish</h2>
+        <p class="dir-card__desc">Catatan memelihara, perawatan akuarium, dan si sirip panjang kesayangan.</p>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer wrap">
+    <p>© 2026 — dibangun manual, disimpan di Supabase, dipublikasikan lewat GitHub Pages.</p>
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
