@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>~/goldfish — akuarium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-theme="goldfish">
+
+<header class="header">
+  <div class="header__row">
+    <a class="brand" href="index.html"><span class="brand__prompt">~$</span>portofolio</a>
+    <span class="clock" data-clock></span>
+    <button class="nav-toggle" data-nav-toggle aria-expanded="false">menu</button>
+  </div>
+  <nav class="nav" data-nav>
+    <a href="index.html">beranda</a>
+    <a href="website.html">website</a>
+    <a href="kopi.html">kopi</a>
+    <a href="goldfish.html">goldfish</a>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero wrap">
+    <span class="eyebrow">./goldfish</span>
+    <h1 class="page-hero__title">Catatan dari akuarium</h1>
+    <p class="page-hero__desc">Perawatan, kebiasaan, dan hal-hal kecil yang saya pelajari dari memelihara goldfish.</p>
+  </section>
+
+  <section class="article-section wrap">
+    <h2 class="section-title">catatan</h2>
+    <div class="grid" data-article-list="goldfish">
+      <!-- diisi otomatis oleh js/articles.js -->
+    </div>
+  </section>
+
+  <footer class="footer wrap">
+    <p>© 2026 — dibangun manual, disimpan di Supabase, dipublikasikan lewat GitHub Pages.</p>
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/site.js"></script>
+<script src="js/articles.js"></script>
+</body>
+</html>
