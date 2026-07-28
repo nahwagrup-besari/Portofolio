@@ -12,7 +12,10 @@
 
 <header class="header">
   <div class="header__row">
-    <a class="brand" href="index.html"><span class="brand__prompt">~$</span>portofolio</a>
+    <a class="brand" href="index.html">
+      <img data-cms-logo class="brand__logo" alt="Logo" hidden />
+      <span class="brand__prompt">~$</span>portofolio
+    </a>
     <span class="clock" data-clock></span>
     <button class="nav-toggle" data-nav-toggle aria-expanded="false">menu</button>
   </div>
@@ -32,8 +35,9 @@
       </div>
       <div class="terminal__body">
         <p class="terminal__line"><span class="prompt">$</span>whoami</p>
-        <h1 class="hero__title">Mahasiswa informatika. Barista. Penjaga goldfish.</h1>
-        <p class="hero__subtitle">Tiga proses yang jalan bersamaan di sistem yang sama — kadang saling silang, tapi masing-masing punya ruangnya sendiri. Pilih direktori di bawah untuk masuk.</p>
+        <img data-cms-hero-img class="profile-photo" alt="Foto profil" hidden />
+        <h1 class="hero__title" data-cms="hero_title">Mahasiswa informatika. Barista. Penjaga goldfish.</h1>
+        <p class="hero__subtitle" data-cms="hero_subtitle">Tiga proses yang jalan bersamaan di sistem yang sama — kadang saling silang, tapi masing-masing punya ruangnya sendiri. Pilih direktori di bawah untuk masuk.</p>
         <p class="terminal__line" style="margin-top:18px"><span class="prompt">$</span>ls -la ./</p>
       </div>
     </div>
@@ -41,24 +45,24 @@
     <div class="directories">
       <a class="dir-card dir-card--website" href="website.html">
         <span class="dir-card__cmd">cd ./website</span>
-        <h2 class="dir-card__title">Website & backend</h2>
-        <p class="dir-card__desc">Proyek, eksperimen, dan catatan belajar seputar backend development.</p>
+        <h2 class="dir-card__title" data-cms="dir_website_title">Website & backend</h2>
+        <p class="dir-card__desc" data-cms="dir_website_desc">Proyek, eksperimen, dan catatan belajar seputar backend development.</p>
       </a>
       <a class="dir-card dir-card--kopi" href="kopi.html">
         <span class="dir-card__cmd">cd ./kopi</span>
-        <h2 class="dir-card__title">Kopi & barista</h2>
-        <p class="dir-card__desc">Racikan, teknik seduh, dan cerita dari balik mesin espresso.</p>
+        <h2 class="dir-card__title" data-cms="dir_kopi_title">Kopi & barista</h2>
+        <p class="dir-card__desc" data-cms="dir_kopi_desc">Racikan, teknik seduh, dan cerita dari balik mesin espresso.</p>
       </a>
       <a class="dir-card dir-card--goldfish" href="goldfish.html">
         <span class="dir-card__cmd">cd ./goldfish</span>
-        <h2 class="dir-card__title">Goldfish</h2>
-        <p class="dir-card__desc">Catatan memelihara, perawatan akuarium, dan si sirip panjang kesayangan.</p>
+        <h2 class="dir-card__title" data-cms="dir_goldfish_title">Goldfish</h2>
+        <p class="dir-card__desc" data-cms="dir_goldfish_desc">Catatan memelihara, perawatan akuarium, dan si sirip panjang kesayangan.</p>
       </a>
     </div>
   </section>
 
   <footer class="footer wrap">
-    <p>© 2026 — dibangun manual, disimpan di Supabase, dipublikasikan lewat GitHub Pages.</p>
+    <p data-cms="footer_text">© 2026 — dibangun manual, disimpan di Supabase, dipublikasikan lewat GitHub Pages.</p>
   </footer>
 </main>
 
