@@ -41,51 +41,177 @@
   <!-- DASHBOARD -->
   <section data-dashboard-view hidden>
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-      <h1 class="hero__title" style="font-size:1.4rem; margin:0;">Kelola artikel</h1>
+      <h1 class="hero__title" style="font-size:1.4rem; margin:0;">Dashboard</h1>
       <button data-logout class="btn--secondary">keluar</button>
     </div>
 
-    <div class="admin-grid">
-      <div class="panel">
-        <h2 class="hero__title" data-form-title style="font-size:1.05rem; margin-top:0;">Tulis artikel baru</h2>
-        <form data-article-form>
-          <div class="field">
-            <label for="category">Kategori</label>
-            <select id="category" name="category" required>
-              <option value="website">website</option>
-              <option value="kopi">kopi</option>
-              <option value="goldfish">goldfish</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="title">Judul</label>
-            <input id="title" name="title" type="text" required />
-          </div>
-          <div class="field">
-            <label for="content">Isi</label>
-            <textarea id="content" name="content" required></textarea>
-          </div>
-          <div class="field">
-            <label for="image">Gambar (opsional)</label>
-            <input id="image" name="image" type="file" accept="image/*" />
-            <input type="hidden" name="existing_image_url" />
-          </div>
-          <div style="display:flex; gap:10px; align-items:center;">
-            <button type="submit">Simpan</button>
-            <button type="button" class="btn--secondary" data-cancel-edit hidden>Batal edit</button>
-          </div>
-          <p class="save-msg" data-save-msg></p>
-        </form>
-      </div>
+    <div class="section-tabs">
+      <button data-section-tab="articles" class="is-active">Kelola artikel</button>
+      <button data-section-tab="tampilan">Tampilan website</button>
+    </div>
 
-      <div class="panel">
-        <div class="filter-tabs">
-          <button data-filter-tab="all" class="is-active">semua</button>
-          <button data-filter-tab="website">website</button>
-          <button data-filter-tab="kopi">kopi</button>
-          <button data-filter-tab="goldfish">goldfish</button>
+    <!-- ================= KELOLA ARTIKEL ================= -->
+    <div data-section="articles">
+      <div class="admin-grid">
+        <div class="panel">
+          <h2 class="hero__title" data-form-title style="font-size:1.05rem; margin-top:0;">Tulis artikel baru</h2>
+          <form data-article-form>
+            <div class="field">
+              <label for="category">Kategori</label>
+              <select id="category" name="category" required>
+                <option value="website">website</option>
+                <option value="kopi">kopi</option>
+                <option value="goldfish">goldfish</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="title">Judul</label>
+              <input id="title" name="title" type="text" required />
+            </div>
+            <div class="field">
+              <label for="content">Isi</label>
+              <textarea id="content" name="content" required></textarea>
+            </div>
+            <div class="field">
+              <label for="image">Gambar (opsional)</label>
+              <input id="image" name="image" type="file" accept="image/*" />
+              <input type="hidden" name="existing_image_url" />
+            </div>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <button type="submit">Simpan</button>
+              <button type="button" class="btn--secondary" data-cancel-edit hidden>Batal edit</button>
+            </div>
+            <p class="save-msg" data-save-msg></p>
+          </form>
         </div>
-        <div data-admin-list></div>
+
+        <div class="panel">
+          <div class="filter-tabs">
+            <button data-filter-tab="all" class="is-active">semua</button>
+            <button data-filter-tab="website">website</button>
+            <button data-filter-tab="kopi">kopi</button>
+            <button data-filter-tab="goldfish">goldfish</button>
+          </div>
+          <div data-admin-list></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAMPILAN WEBSITE ================= -->
+    <div data-section="tampilan" hidden>
+      <div class="panel settings-panel">
+        <h2 class="hero__title" style="font-size:1.05rem; margin-top:0;">Ganti caption &amp; tampilan</h2>
+        <p class="save-msg" style="margin-top:-8px;">Perubahan di sini langsung tampil di seluruh halaman publik setelah disimpan.</p>
+
+        <form data-settings-form>
+
+          <fieldset>
+            <legend>Beranda — hero</legend>
+            <div class="field">
+              <label for="hero_title">Judul hero</label>
+              <input id="hero_title" name="hero_title" type="text" />
+            </div>
+            <div class="field">
+              <label for="hero_subtitle">Subjudul hero</label>
+              <textarea id="hero_subtitle" name="hero_subtitle" style="min-height:80px"></textarea>
+            </div>
+            <div class="field">
+              <label for="hero_image">Gambar hero / foto profil (opsional)</label>
+              <input id="hero_image" name="hero_image" type="file" accept="image/*" />
+              <img data-preview="hero_image_url" class="field-preview" alt="" />
+              <input type="hidden" name="hero_image_url" />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Beranda — kartu direktori</legend>
+            <div class="field">
+              <label for="dir_website_title">Judul kartu "website"</label>
+              <input id="dir_website_title" name="dir_website_title" type="text" />
+            </div>
+            <div class="field">
+              <label for="dir_website_desc">Deskripsi kartu "website"</label>
+              <input id="dir_website_desc" name="dir_website_desc" type="text" />
+            </div>
+            <div class="field">
+              <label for="dir_kopi_title">Judul kartu "kopi"</label>
+              <input id="dir_kopi_title" name="dir_kopi_title" type="text" />
+            </div>
+            <div class="field">
+              <label for="dir_kopi_desc">Deskripsi kartu "kopi"</label>
+              <input id="dir_kopi_desc" name="dir_kopi_desc" type="text" />
+            </div>
+            <div class="field">
+              <label for="dir_goldfish_title">Judul kartu "goldfish"</label>
+              <input id="dir_goldfish_title" name="dir_goldfish_title" type="text" />
+            </div>
+            <div class="field">
+              <label for="dir_goldfish_desc">Deskripsi kartu "goldfish"</label>
+              <input id="dir_goldfish_desc" name="dir_goldfish_desc" type="text" />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Judul & deskripsi tiap halaman kategori</legend>
+            <div class="field">
+              <label for="page_website_title">Judul halaman website</label>
+              <input id="page_website_title" name="page_website_title" type="text" />
+            </div>
+            <div class="field">
+              <label for="page_website_desc">Deskripsi halaman website</label>
+              <input id="page_website_desc" name="page_website_desc" type="text" />
+            </div>
+            <div class="field">
+              <label for="page_kopi_title">Judul halaman kopi</label>
+              <input id="page_kopi_title" name="page_kopi_title" type="text" />
+            </div>
+            <div class="field">
+              <label for="page_kopi_desc">Deskripsi halaman kopi</label>
+              <input id="page_kopi_desc" name="page_kopi_desc" type="text" />
+            </div>
+            <div class="field">
+              <label for="page_goldfish_title">Judul halaman goldfish</label>
+              <input id="page_goldfish_title" name="page_goldfish_title" type="text" />
+            </div>
+            <div class="field">
+              <label for="page_goldfish_desc">Deskripsi halaman goldfish</label>
+              <input id="page_goldfish_desc" name="page_goldfish_desc" type="text" />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Footer & logo</legend>
+            <div class="field">
+              <label for="footer_text">Teks footer</label>
+              <input id="footer_text" name="footer_text" type="text" />
+            </div>
+            <div class="field">
+              <label for="logo">Logo header (opsional)</label>
+              <input id="logo" name="logo" type="file" accept="image/*" />
+              <img data-preview="logo_url" class="field-preview" alt="" />
+              <input type="hidden" name="logo_url" />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Warna aksen per tema</legend>
+            <div class="field">
+              <label for="accent_website">Warna tema "website"</label>
+              <input id="accent_website" name="accent_website" type="color" />
+            </div>
+            <div class="field">
+              <label for="accent_kopi">Warna tema "kopi"</label>
+              <input id="accent_kopi" name="accent_kopi" type="color" />
+            </div>
+            <div class="field">
+              <label for="accent_goldfish">Warna tema "goldfish"</label>
+              <input id="accent_goldfish" name="accent_goldfish" type="color" />
+            </div>
+          </fieldset>
+
+          <button type="submit">Simpan tampilan</button>
+          <p class="save-msg" data-settings-save-msg></p>
+        </form>
       </div>
     </div>
   </section>
