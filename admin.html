@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-theme="website">
+
+<header class="header">
+  <div class="header__row">
+    <a class="brand" href="index.html"><span class="brand__prompt">~$</span>admin</a>
+  </div>
+</header>
+
+<main class="admin-shell wrap">
+
+  <!-- LOGIN -->
+  <section data-login-view>
+    <div class="login-card">
+      <h1 class="hero__title" style="font-size:1.3rem">Masuk sebagai admin</h1>
+      <form data-login-form>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="username" />
+        </div>
+        <div class="field">
+          <label for="password">Kata sandi</label>
+          <input id="password" name="password" type="password" required autocomplete="current-password" />
+        </div>
+        <p class="error-msg" data-login-error></p>
+        <button type="submit">Masuk</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section data-dashboard-view hidden>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+      <h1 class="hero__title" style="font-size:1.4rem; margin:0;">Kelola artikel</h1>
+      <button data-logout class="btn--secondary">keluar</button>
+    </div>
+
+    <div class="admin-grid">
+      <div class="panel">
+        <h2 class="hero__title" data-form-title style="font-size:1.05rem; margin-top:0;">Tulis artikel baru</h2>
+        <form data-article-form>
+          <div class="field">
+            <label for="category">Kategori</label>
+            <select id="category" name="category" required>
+              <option value="website">website</option>
+              <option value="kopi">kopi</option>
+              <option value="goldfish">goldfish</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="title">Judul</label>
+            <input id="title" name="title" type="text" required />
+          </div>
+          <div class="field">
+            <label for="content">Isi</label>
+            <textarea id="content" name="content" required></textarea>
+          </div>
+          <div class="field">
+            <label for="image">Gambar (opsional)</label>
+            <input id="image" name="image" type="file" accept="image/*" />
+            <input type="hidden" name="existing_image_url" />
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button type="submit">Simpan</button>
+            <button type="button" class="btn--secondary" data-cancel-edit hidden>Batal edit</button>
+          </div>
+          <p class="save-msg" data-save-msg></p>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="filter-tabs">
+          <button data-filter-tab="all" class="is-active">semua</button>
+          <button data-filter-tab="website">website</button>
+          <button data-filter-tab="kopi">kopi</button>
+          <button data-filter-tab="goldfish">goldfish</button>
+        </div>
+        <div data-admin-list></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/site.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
